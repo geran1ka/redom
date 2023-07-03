@@ -48,6 +48,10 @@ const renderCard = () => {
           el('input', {
             className: 'input input__holder',
             type: 'text',
+            oninput(event) {
+              document.querySelector('.card__name').textContent = event.target.value.toUpperCase();
+              console.log(document.querySelector('.card__personal'));
+            }
           })
         ]),
       el('div', {
