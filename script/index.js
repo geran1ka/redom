@@ -1,36 +1,58 @@
-import {el, setChildren} from '../node_modules/redom/dist/redom.es.js';
+import {el, setChildren} from 'redom';
+import IMask from 'imask';
+const createCreditCard = () => {
+  const cardNumber = el('span', {
+    className: 'card__number',
+  },
+  'xxxx xxxx xxxx xxxx',
+  );
 
-const renderCard = () => {
+  const cardName = el('span',
+    {
+      className: 'card__name',
+    },
+    'John Doe',
+    );
+  const cardDate = el('span',
+    {
+      className: 'card__date',
+    },
+    '04/24',
+    );
+
+  const cardPersonal = el('div', 
+  {
+    className: 'card__personal',
+  },
+  [
+    cardName,
+    cardDate,
+  ])
   const creditCard = el('div',
     {
       className: 'credit-card'
     },
     [
-      el('span', {
-        className: 'card__number',
-      },
-      'xxxx xxxx xxxx xxxx',
-      ),
-      el('div', 
-      {
-        className: 'card__personal',
-      },
-      [
-        el('span',
-        {
-          className: 'card__name',
-        },
-        'John Doe',
-        ),
-        el('span',
-        {
-          className: 'card__date',
-        },
-        '04/24',
-        ),
-      ])
+      cardNumber,
+      cardPersonal,
     ]
   );
+
+  return {
+    creditCard,
+    cardNumber,
+    cardName,
+    cardDate,
+  };
+}
+
+const renderCard = () => {
+  const {
+    creditCard,
+    cardNumber,
+    cardName,
+    cardDate,
+  } = createCreditCard();
 
   const form = el('form', 
     {
@@ -49,8 +71,8 @@ const renderCard = () => {
             className: 'input input__holder',
             type: 'text',
             oninput(event) {
-              document.querySelector('.card__name').textContent = event.target.value.toUpperCase();
-              console.log(document.querySelector('.card__personal'));
+              event.target.value = event.target.value.replace(/[^a-z\s]/gi, '').toUpperCase();
+              cardName.textContent = event.target.value;
             }
           })
         ]),
@@ -64,6 +86,16 @@ const renderCard = () => {
           el('input', {
             className: 'input input__number',
             id: 'cardNumber',
+            placeholder: 'xxxx xxxx xxxx xxxx',
+            oninput(event) {
+              const maskOptions3 = {
+                mask: '0000 0000 0000 0000',
+                lazy: false
+            } 
+            //event.target.value = event.target.value.replace(/\D/, '')
+            const mask = new IMask(event.target, maskOptions3).alignCursor();
+            cardNumber.textContent = event.target.value;
+            }
           })
         ]),
       el('div', {
@@ -75,7 +107,11 @@ const renderCard = () => {
           ),
           el('input', {
             className: 'input input__date',
-            type: 'text',
+            type: 'month',
+            oninput(event) {
+              //event.target.value = 
+              cardDate.textContent = event.target.value.replace(/\d{2}(\d{2})-(\d{2})/, '$2/$1');
+            }
           })
         ]),
       el('div', {
@@ -87,11 +123,20 @@ const renderCard = () => {
           ),
           el('input', {
             className: 'input input__cvv',
-            type: 'text',
+            type: 'password',
+            maxlength: 3,
+            oninput(event) {
+              event.target.value = event.target.value.replace(/\D/gi, '');
+            }
           })
         ]),
       el('button', {
         className: 'form__button',
+        type: 'submit',
+        onclick(event) {
+          event.preventDefault()
+          
+        }
       }, 'CHECK OUT')
     ]
   )
