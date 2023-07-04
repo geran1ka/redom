@@ -1,5 +1,8 @@
 import {el, setChildren} from 'redom';
 import IMask from 'imask';
+// import {el, setChildren} from '../node_modules/redom/dist/redom.es.js';
+// import IMask from '../node_modules/imask/dist/';
+
 const createCreditCard = () => {
   const cardNumber = el('span', {
     className: 'card__number',
