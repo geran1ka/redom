@@ -189,7 +189,8 @@
 }
 
 .input__holder {
-  padding: 19px 94px;
+  padding: 19px 58px;
+  text-align: center;
 }
 
 .input__number {
