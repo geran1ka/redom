@@ -110,10 +110,11 @@ const renderCard = () => {
           ),
           el('input', {
             className: 'input input__date',
-            type: 'month',
+            type: 'text',
+            maxlength: 4,
             oninput(event) {
-              //event.target.value = 
-              cardDate.textContent = event.target.value.replace(/\d{2}(\d{2})-(\d{2})/, '$2/$1');
+              event.target.value = event.target.value.replace(/(\D{2})(\D{2})/g, '');
+              cardDate.textContent = event.target.value.replace(/([0-1][0-9])(d{2})/, '$1 / $2');
             }
           })
         ]),
