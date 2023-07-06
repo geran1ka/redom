@@ -92,10 +92,10 @@ const renderCard = () => {
               const maskOptions3 = {
                 mask: '0000 0000 0000 0000',
                 lazy: false
-            } 
-            const mask = new IMask(event.target, maskOptions3).alignCursor();
-            cardNumber.textContent = event.target.value;
-            }
+              } 
+              const mask = new IMask(event.target, maskOptions3).alignCursor();
+              cardNumber.textContent = event.target.value;
+              }
           })
         ]),
       el('div', {
@@ -108,8 +108,14 @@ const renderCard = () => {
           el('input', {
             className: 'input input__date',
             type: 'text',
-            maxlength: 4,
+            placeholder: 'xx/xx',
             oninput(event) {
+              const maskOptions3 = {
+                mask: '00/00',
+                lazy: false
+              } 
+              const mask = new IMask(event.target, maskOptions3).alignCursor();
+              cardNumber.textContent = event.target.value;
               event.target.value = event.target.value.replace(/\D/g, '');
               cardDate.textContent = event.target.value.replace(/(\d{2})(\d{2})/, '$1 / $2');
             }
