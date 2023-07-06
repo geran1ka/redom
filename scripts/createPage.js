@@ -1,4 +1,5 @@
-import {el, setChildren, svg} from '../node_modules/redom/dist/redom.es.js';
+//import {el, setChildren, svg} from '../node_modules/redom/dist/redom.es.js';
+import {el, setChildren, svg} from 'redom';
 
 const createTitle = () => {
   return el('div', {
@@ -22,22 +23,14 @@ const createForm = () => {
     ]),
     el('div', {className: 'field-container'}, [
       el('label', {for: 'expirationdate'}, 'Expiration (mm/yy)'),
-      el('input', {id: 'expirationdate', type: 'text', pattern: '[0-9]*', inputmode: 'numeric'}),
+      el('input', {id: 'expirationdate', type: 'text', pattern: '[0-9]*', inputmode: 'numeric', maxlength: 4}),
     ]),
     el('div', {className: 'field-container'}, [
       el('label', {for: 'securitycode'}, 'Security Code'),
-      el('input', {id: 'securitycode', type: 'text', pattern: '[0-9]*', inputmode: 'numeric'}),
+      el('input', {id: 'securitycode', type: 'text', pattern: '[0-9]*', inputmode: 'numeric', maxlength: 3}),
     ]),
   ])
 }
-/*`<svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg"
-xmlns:xlink="http://www.w3.org/1999/xlink">
-// сюда всталяем иконки
-</svg>
-*/
-
-
-
 
 const createCreditCard = () => {
   return el('div', {className: 'container'},
@@ -63,13 +56,13 @@ const front = svg("svg", {version:"1.1", id:"cardfront", xmlns:"http://www.w3.or
       ),
     svg("text", {transform:"matrix(1 0 0 1 60.106 295.0121)", id:"svgnumber", class:"st2 st3 st4"}, "0123 4567 8910 1112"),
     svg("text", {transform:"matrix(1 0 0 1 54.1064 428.1723)", id:"svgname", class:"st2 st5 st6"}, "ИВАН ИВАНОВ"),
-    svg("text", {transform:"atrix(1 0 0 1 54.1074 389.8793)", id:"svgnumber", class:"st7 st5 st8"}, "cardholder name"),
-    svg("text", {transform:"matrix(1 0 0 1 479.7754 388.8793)", id:"svgnumber", class:"st7 st5 st8"}, "expiration"),
-    svg("text", {transform:"matrix(1 0 0 1 65.1054 241.5)", id:"svgnumber", class:"st7 st5 st8"}, "card number"),
+    svg("text", {transform:"matrix(1 0 0 1 54.1074 389.8793)", class:"st7 st5 st8"}, "cardholder name"),
+    svg("text", {transform:"matrix(1 0 0 1 479.7754 388.8793)", class:"st7 st5 st8"}, "expiration"),
+    svg("text", {transform:"matrix(1 0 0 1 65.1054 241.5)", class:"st7 st5 st8"}, "card number"),
     svg("g",
       svg("text", {transform:"matrix(1 0 0 1 574.4219 433.8095)", id:"svgexpire", class:"st2 st5 st9"}, "01/23"),
       svg("text", {transform:"matrix(1 0 0 1 479.3848 417.0097)", class:"st2 st10 st11"}, "VALID"),
-      svg("text", {transform:"atrix(1 0 0 1 479.3848 435.6762)", class:"st2 st10 st11"}, "THRU"),
+      svg("text", {transform:"matrix(1 0 0 1 479.3848 435.6762)", class:"st2 st10 st11"}, "THRU"),
       svg("polygon", {class:"st2", points:"554.5,421 540.4,414.2 540.4,427.9"})
     ),
     svg("g", {id:"cchip"},
