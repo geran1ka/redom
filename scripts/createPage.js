@@ -1,4 +1,3 @@
-//import {el, setChildren, svg} from '../node_modules/redom/dist/redom.es.js';
 import {el, setChildren, svg} from 'redom';
 
 const createTitle = () => {
@@ -9,7 +8,7 @@ const createTitle = () => {
   )
 };
 
-const svgG = svg('svg', {id: "ccicon", 'class': "ccicon", width: "750", height: "471", viewBox: "0 0 750 471", version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink" });
+const ccicon = svg('svg', {id: "ccicon", 'class': "ccicon", width: "750", height: "471", viewBox: "0 0 750 471", version: "1.1", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink" });
 
 const createForm = () => {
   return el('div', {className: 'form-container'}, [
@@ -19,11 +18,11 @@ const createForm = () => {
     ]),
     el('div', {className: 'field-container'}, [
       el('label', {for: 'cardnumber'}, 'Card Number'),
-      el('input', {id: 'cardnumber', type: 'text', pattern: '[0-9]*', inputmode: 'numeric'}), svgG
+      el('input', {id: 'cardnumber', type: 'text', pattern: '[0-9]*', inputmode: 'numeric'}), ccicon,
     ]),
     el('div', {className: 'field-container'}, [
       el('label', {for: 'expirationdate'}, 'Expiration (mm/yy)'),
-      el('input', {id: 'expirationdate', type: 'text', pattern: '[0-9]*', inputmode: 'numeric', maxlength: 4}),
+      el('input', {id: 'expirationdate', type: 'text', pattern: '[0-9]*', inputmode: 'numeric', placeholder: '__/__'}),
     ]),
     el('div', {className: 'field-container'}, [
       el('label', {for: 'securitycode'}, 'Security Code'),
@@ -44,12 +43,12 @@ const createCreditCard = () => {
   )
 };
 
-const front = svg("svg", {version:"1.1", id:"cardfront", xmlns:"http://www.w3.org/2000/svg", xmlns:{xlink:"http://www.w3.org/1999/xlink"}, x:"0px", y:"0px", viewBox:"0 0 750 471", style:"enable-background:new 0 0 750 471;", xml:{space:"preserve"}},
+const front = svg("svg", {version:"1.1", id:"cardfront", xmlns:"http://www.w3.org/2000/svg", "xmlns:xlink":"http://www.w3.org/1999/xlink", x:"0px", y:"0px", viewBox:"0 0 750 471", style:"enable-background:new 0 0 750 471;", "xml:space":"preserve"},
   svg('g', {id:"Front"},
     svg('g', {id:"CardBackground"},
       svg('g', {id:"Page-1_1_"},
         svg('g', {id:"amex_1_"},
-          svg('path', {id:"Rectangle-1_1_", class:"lightcolor grey", d:"M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40C0,17.9,17.9,0,40,0z"})
+          svg('path', {id:"Rectangle-1_1_", "class":"lightcolor grey", d:"M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40C0,17.9,17.9,0,40,0z"})
           )
         ),
       svg('path', {class:"darkcolor greydark", d:"M750,431V193.2c-217.6-57.5-556.4-13.5-750,24.9V431c0,22.1,17.9,40,40,40h670C732.1,471,750,453.1,750,431z"})
@@ -95,15 +94,9 @@ const front = svg("svg", {version:"1.1", id:"cardfront", xmlns:"http://www.w3.or
     )
   ),
   svg("g", {id:"Back"})
-)
-export const createPage = () => {
-  const title = createTitle();
-  const creditCard = createCreditCard();
-  const form = createForm();
-  return setChildren(document.body, [title, creditCard, form,]);
-}
+);
 
-const back = svg("svg", {version:"1.1", id:"cardback", xmlns:"http://www.w3.org/2000/svg", xmlns:{xlink:"http://www.w3.org/1999/xlink"}, x:"0px", y:"0px", viewBox:"0 0 750 471", style:"enable-background:new 0 0 750 471;", xml: {space:"preserve"}},
+const back = svg("svg", {version:"1.1", id:"cardback", xmlns:"http://www.w3.org/2000/svg", "xmlns:xlink":"http://www.w3.org/1999/xlink", x:"0px", y:"0px", viewBox:"0 0 750 471", style:"enable-background:new 0 0 750 471;", "xml:space":"preserve"},
   svg("g", {id:"Front"},
     svg("line", {class:"st0", x1:"35.3", y1:"10.4", x2:"36.7", y2:"11"})
   ),
@@ -128,5 +121,12 @@ const back = svg("svg", {version:"1.1", id:"cardback", xmlns:"http://www.w3.org/
     svg("rect", {x:"58.1", y:"405.6", class:"st11", width:"421.7", height:"13.5",}),
     svg("text", {transform:"matrix(1 0 0 1 59.5073 228.6099)", id:"svgnameback", class:"st12 st13"}, "Иван Иванов"),
   )
-)
+);
+
+export const createPage = () => {
+  const title = createTitle();
+  const creditCard = createCreditCard();
+  const form = createForm();
+  return setChildren(document.body, [title, creditCard, form,]);
+}
 

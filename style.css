@@ -101,6 +101,11 @@ input {
     max-height: 60px;
 }
 
+#expirationdate,
+#securitycode {
+    text-align: center;
+}
+
 .creditcard svg#cardfront,
 .creditcard svg#cardback {
     width: 100%;
