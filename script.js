@@ -1,9 +1,10 @@
+import { setChildren } from "redom";
 import { createPage } from "./scripts/createPage.js";
 import IMask from "imask";
 import { swapColor } from "./scripts/swapColor.js";
 import { mask } from "./scripts/mask.js";
 
-createPage();
+//createPage();
 
 const name = document.getElementById('name');
 const cardnumber = document.getElementById('cardnumber');
@@ -13,7 +14,7 @@ const svgexpire = document.getElementById('svgexpire');
 const securitycode = document.getElementById('securitycode');
 const svgsecurity = document.getElementById('svgsecurity');
 const ccicon = document.getElementById('ccicon');
-const cclogo = document.getElementById('ccsingle');
+const cclogo = document.getElementById('cclogo');
 const svgname = document.getElementById('svgname')
 const svgnameback = document.getElementById('svgnameback')
 const lightcolor = document.querySelectorAll('.lightcolor');
@@ -49,27 +50,20 @@ expirationdate.addEventListener('input', () => {
 
 cardnumber.addEventListener('input', ()=> {
 
-  if (cardnumber.value.length === 4) {
-    for (let i = 0; i < mask.length - 1; i++) {
-      const regExp = new RegExp(mask[i]?.regex);
-      const res = regExp.test(cardnumber.value);
-        if (res) {
-          new IMask(cardnumber, mask[i].mask);
-          cclogo.innerHTML = mask[i].logo;
-          swapColor(lightcolor, darkcolor, mask[i].color);
-          ccicon.innerHTML = mask[i].icon;
-          return
-        }
-        if (!res) {
-          new IMask(cardnumber, mask[9].mask);
-          cclogo.innerHTML = '';
-          swapColor(lightcolor, darkcolor, mask[9].color);
-          ccicon.innerHTML = '';
-        }
-    }
+  if (cardnumber.value.length > 5) {
+
+    const res = mask.findIndex(((item, i) => {
+      console.log('res: ', cardnumber.value.match(item.regex));
+      return cardnumber.value.match(item.mask)
+
+      console.log('res: ', res);
+
+    }))
   }
   svgnumber.textContent = cardnumber.value;
 });
+
+
 
 
 
