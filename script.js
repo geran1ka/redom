@@ -1,7 +1,8 @@
+import { setChildren } from "redom";
 import { createPage } from "./scripts/createPage.js";
 import IMask, { InputMask } from "imask";
 
-createPage();
+//createPage();
 
 const name = document.getElementById('name');
 const cardnumber = document.getElementById('cardnumber');
@@ -11,7 +12,9 @@ const svgexpire = document.getElementById('svgexpire');
 const securitycode = document.getElementById('securitycode');
 const svgsecurity = document.getElementById('svgsecurity');
 const ccicon = document.getElementById('ccicon');
+console.log('ccicon: ', ccicon);
 const cclogo = document.getElementById('cclogo');
+console.log('cclogo: ', cclogo);
 const svgname = document.getElementById('svgname')
 const svgnameback = document.getElementById('svgnameback')
 const lightcolor = document.querySelectorAll('.lightcolor');
@@ -136,21 +139,27 @@ expirationdate.addEventListener('input', () => {
 IMask(cardnumber, mask[9].mask);
 cardnumber.addEventListener('input', ()=> {
 
-  if (cardnumber.value.length > 5) {
+  if (cardnumber.value.length > 4) {
+    for (let i = 0; i < mask.length - 1; i++) {
+      const regExp = new RegExp(mask[i]?.regex);
+      const res = regExp.test(cardnumber.value);
 
-    const res = mask.findIndex(((item, i) => {
-      console.log('res: ', cardnumber.value.match(item.regex));
-      return cardnumber.value.match(item.mask)
-
-      console.log('res: ', res);
-
-    }))
+        if (res) {
+          IMask(cardnumber, mask[i].mask);
+          //console.log(mask[i].logo);
+          swapColor(mask[i].color);
+          console.log(mask[i].cardType);
+          //console.log(mask[i].logo);
+        }
+    }
   }
 
   svgnumber.textContent = cardnumber.value;
 
 
 })
+
+
 
 
 
