@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "imask": "^7.1.0-alpha.0",
-    "redom": "^3.29.1"
-  },
-  "devDependencies": {
-    "parcel": "^2.9.3"
-  }
-}
